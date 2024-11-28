@@ -1,72 +1,162 @@
-/* General Reset */
+
+  /* General Reset */
 body, html {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    color: #ffffff;
-    overflow: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #ffffff;
+  overflow: hidden;
+}
+
+/* Main container for the clock */
+.clock-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 40px 60px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  width: 350px; /* Fixed width */
+}
+
+/* Moving Border Animation */
+.clock-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  border: 3px solid transparent;
+  box-sizing: border-box;
+
+  /* Animated gradient border */
+  background: linear-gradient(90deg, #00c6ff, #0072ff, #00c6ff);
+  background-size: 300% 300%;
+  animation: borderAnimation 3s linear infinite;
+}
+
+/* Styling the clock */
+.clock {
+  font-size: 4rem;
+  font-weight: bold;
+  letter-spacing: 4px;
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  transition: all 0.2s ease;
+}
+
+/* Styling individual clock segments */
+.clock span {
+  display: inline-block;
+}
+
+#ampm {
+  font-size: 1.8rem;
+  vertical-align: top;
+  margin-left: 12px;
+  color: #ffecb3;
+  font-weight: normal;
+}
+
+/* Keyframe for the border animation */
+@keyframes borderAnimation {
+  0% {
+    background-position: 0% 50%;
   }
-  
-  /* Clock Container */
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Button container */
+.opt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+/* Button Styling */
+button {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: none;
+  padding: 15px 30px;
+  margin: 10px 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+  width: 100%; /* Make buttons full width of the container */
+  max-width: 200px; /* Limit max width for the buttons */
+}
+
+/* Button Hover Effects */
+button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+button:active {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+/* Individual Button Backgrounds */
+button#clock {
+  background: linear-gradient(45deg, #00c6ff, #0072ff);
+}
+
+button#stopwatch {
+  background: linear-gradient(45deg, #ff7e5f, #feb47b);
+}
+
+button#alarm {
+  background: linear-gradient(45deg, #ff8c00, #ff6347);
+}
+
+button#timer {
+  background: linear-gradient(45deg, #32cd32, #228b22);
+}
+
+/* Focus effect for buttons */
+button:focus {
+  outline: none;
+  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.6);
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 768px) {
   .clock-container {
-    text-align: center;
-    background: rgba(255, 255, 255, 0.1);
     padding: 20px 40px;
-    border-radius: 10px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-    position: relative;
-    overflow: hidden;
   }
-  
-  /* Moving Border Line */
-  .clock-container::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    border: 3px solid transparent;
-    box-sizing: border-box;
-  
-    /* Animated gradient border */
-    background: linear-gradient(90deg, #00c6ff, #0072ff, #00c6ff);
-    background-size: 300% 300%;
-    animation: borderAnimation 2s linear infinite;
-  }
-  
-  /* Clock Styling */
+
   .clock {
-    font-size: 3rem;
-    font-weight: bold;
-    letter-spacing: 2px;
-    position: relative; /* Ensures the text is above the animated border */
-    z-index: 1;
+    font-size: 2.5rem;
   }
-  
-  /* Individual Segments */
-  .clock span {
-    display: inline-block;
+
+  button {
+    padding: 12px 25px;
+    font-size: 1rem;
   }
-  
-  #ampm {
-    font-size: 1.5rem;
-    vertical-align: top;
-    margin-left: 10px;
-  }
-  
-  /* Keyframes for the Border Animation */
-  @keyframes borderAnimation {
-    0% {
-      background-position: 0% 50%;
-    }
-    100% {
-      background-position: 100% 50%;
-    }
-  }
+}
